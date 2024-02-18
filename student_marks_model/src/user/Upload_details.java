@@ -10,9 +10,18 @@ import java.io.FileInputStream;
 import java.sql.SQLException;
 import java.util.Iterator;
 
+import java.util.Iterator;
+import java.util.List;
+
+//import org.apache.poi.ss.usermodel.Cell;
+//import org.apache.poi.ss.usermodel.Row;
+//import org.apache.poi.ss.usermodel.Sheet;
+//import org.apache.poi.ss.usermodel.Workbook;
+//import org.apache.poi.ss.usermodel.WorkbookFactory;
+
 public class Upload_details {
 	   // Creating an ArrayList of Strings
-	public static void main(String args[]) throws SQLException {
+	 public static void main(String args[]) throws SQLException {
 		
 	
 //    ArrayList<String> stringList = new ArrayList<>();
@@ -39,7 +48,7 @@ public class Upload_details {
 		System.out.println("Cate - "+cate);
 		System.out.println("Num - "+num);
 		System.out.println("Makrs - "+marks);
-}
+} 
 		
 		
 
@@ -77,5 +86,4 @@ public class Upload_details {
 //            e.printStackTrace();
 //        }
 //    }
-
 }

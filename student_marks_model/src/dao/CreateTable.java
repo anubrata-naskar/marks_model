@@ -6,6 +6,8 @@ import java.sql.SQLException;
 
 import com.mysql.cj.xdevapi.Statement;
 
+// token  - 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
+
 public class CreateTable {
 	public void create_table() {
         try {

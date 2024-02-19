@@ -1,6 +1,9 @@
 package repository;
 
+import java.sql.SQLException;
 import java.util.ArrayList;
+
+import transferobjects.Student;
 
 public class UserRepository extends BaseRepository{
 	public UserRepository(StorageRepository storage) {
@@ -14,7 +17,7 @@ public class UserRepository extends BaseRepository{
 	}
 
 	@Override
-	public String getAllDetails(String coll, String cate, int number, String section) {
+	public Student getAllDetails(String coll, String cate, int number, String section) throws SQLException {
 		// TODO Auto-generated method stub
 		return null;
 	}

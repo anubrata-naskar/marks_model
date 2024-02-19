@@ -14,35 +14,35 @@ public class MarksDAO implements MarksDetailsDAO {
 	BaseRepository ur = new UserRepository(new MySQLRepository());
 	BaseRepository mr = new MarksRepository(new MySQLRepository());
 	
-	Connection cn;
+	//Connection cn;
 	
-	CreateTable ct = new CreateTable();
+	//CreateTable ct = new CreateTable();
 	
 	
 	@Override
 	public Student get(String course) throws SQLException {
-		create_connection();
-		ct.create_table();
+		//create_connection();
+		//ct.create_table();
 		
 		Student stu = null;
-		String str = mr.getAllDetails("T91","CSE",214031,"b.tech.(computer science & engineering) sem v 2023");
+		stu = mr.getAllDetails("T91","CSE",214031,"b.tech.(computer science & engineering) sem v 2023");
 		//String str = "SELECT * FROM `b.tech.(computer science & engineering) sem v 2023` WHERE `coll` LIKE 'T91' AND `cate` LIKE 'CSE' AND `number` = 214031";
 		//System.out.println(str);
 		
 		
-		PreparedStatement ps = cn.prepareStatement(str);
-		ResultSet rs = ps.executeQuery();
-		
-		if(rs.next()) {
-			String coll = rs.getString("coll");
-			String cate = rs.getString("cate");
-			String paper_code = rs.getString("paper_code");
-			int number = rs.getInt("number");
-			int marks = rs.getInt("marks");
-			
-			stu = new Student("b.tech.(computer science & engineering) sem v 2023", 
-					paper_code, "IA", "", coll, cate, number, 100, marks);
-		} 
+//		PreparedStatement ps = cn.prepareStatement(str);
+//		ResultSet rs = ps.executeQuery();
+//		
+//		if(rs.next()) {
+//			String coll = rs.getString("coll");
+//			String cate = rs.getString("cate");
+//			String paper_code = rs.getString("paper_code");
+//			int number = rs.getInt("number");
+//			int marks = rs.getInt("marks");
+//			
+//			stu = new Student("b.tech.(computer science & engineering) sem v 2023", 
+//					paper_code, "IA", "", coll, cate, number, 100, marks);
+//		} 
 		return stu;
 	}
 	@Override
@@ -61,14 +61,14 @@ public class MarksDAO implements MarksDetailsDAO {
 		return 0;
 	}
 	
-	public void create_connection() throws SQLException{
+	/**public void create_connection() throws SQLException{
 	DatabaseDAO create_con = new DatabaseDAO();
 	 cn = create_con.getConnection();
 	if(cn != null)
 		System.out.println("Connection create successfull");
 	else
 		System.out.println("Connection failed");
-	}
+	}**/
 	
 	
 //	//transferobjects

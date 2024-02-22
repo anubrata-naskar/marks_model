@@ -10,7 +10,6 @@ public class FetchFromDatabase {
 		
 		//fetch highest marks
 		//paper-code, years
-		
 		MarksDAO ma = new MarksDAO();
 		int x = ma.highestMarks("cscl501",2023);
 		System.out.println(x);

@@ -8,6 +8,7 @@ import transferobjects.Marks;
 import transferobjects.Student;
 
 public class MarksRepository extends BaseRepository{
+	
 	public MarksRepository(StorageRepository storage) {
 		super(storage);
 	}

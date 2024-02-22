@@ -10,4 +10,5 @@ public interface MarksDetailsDAO {
 	List<Student> getAll() throws SQLException;
 	int save(Student student) throws SQLException;
 	int insert(Student student) throws SQLException;
+	
 }

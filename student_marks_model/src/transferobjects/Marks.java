@@ -2,6 +2,7 @@ package transferobjects;
 
 public class Marks {
 	private String paperCode,semYear,fullMark,obMark,paperTitle,examType,roll;
+	
 	public Marks(String paperCode,String semYear,String fullMark,String obMark, String paperTitle, String examType, String roll) {
 		this.paperCode = paperCode;
 		this.semYear = semYear;

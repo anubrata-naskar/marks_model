@@ -21,6 +21,7 @@ public class DatabaseDAO {
 	    private String username = "root";
 	    private String password = "";
 	    private Connection connection = null;
+	    
 	    public Connection getConnection() throws SQLException {
 				connection = DriverManager.getConnection(url,username,password);
 	    	return connection;

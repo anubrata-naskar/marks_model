@@ -12,6 +12,7 @@ public abstract class BaseRepository {
 	protected BaseRepository(StorageRepository storage) {
 		this.storage = storage;
 	}
+	
 	public abstract void storeDetails(List<Marks> m); 
 	public abstract void storeMarks(ArrayList<String> a);
 	public abstract Student getAllDetails(String coll, String cate, int number, String section) throws SQLException;

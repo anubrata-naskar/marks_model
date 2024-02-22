@@ -18,12 +18,10 @@ public class MarksDAO implements MarksDetailsDAO {
 	
 	//CreateTable ct = new CreateTable();
 	
-	
 	@Override
 	public Student get(String course) throws SQLException {
 		//create_connection();
 		//ct.create_table();
-		
 		Student stu = null;
 		stu = mr.getAllDetails("T91","CSE",214031,"b.tech.(computer science & engineering) sem v 2023");
 		//String str = "SELECT * FROM `b.tech.(computer science & engineering) sem v 2023` WHERE `coll` LIKE 'T91' AND `cate` LIKE 'CSE' AND `number` = 214031";
@@ -66,16 +64,6 @@ public class MarksDAO implements MarksDetailsDAO {
 		// TODO Auto-generated method stub
 		return 0;
 	}
-	
-	/**public void create_connection() throws SQLException{
-	DatabaseDAO create_con = new DatabaseDAO();
-	 cn = create_con.getConnection();
-	if(cn != null)
-		System.out.println("Connection create successfull");
-	else
-		System.out.println("Connection failed");
-	}**/
-	
 	
 //	//transferobjects
 //	public static void main(String args[]) {

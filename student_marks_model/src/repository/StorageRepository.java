@@ -11,4 +11,5 @@ interface StorageRepository {
 	public void addDetails(int sem, String semYear, List<String> rollList);
 	public void addMarksDetails(List<Marks> marks);
 	public int highestMarks(String s, int n) throws SQLException;
+	
 }

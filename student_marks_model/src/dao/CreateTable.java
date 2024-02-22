@@ -23,7 +23,6 @@ public class CreateTable {
             String password = "";
 
             Connection connection = DriverManager.getConnection(url, user, password);
-
             java.sql.Statement statement = connection.createStatement();
 
             String createStudentsTableQuery = "CREATE TABLE IF NOT EXISTS students (" +

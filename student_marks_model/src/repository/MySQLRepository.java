@@ -50,6 +50,7 @@ public class MySQLRepository implements StorageRepository{
 //		System.out.println(str);
 //	}
 	
+	
 	public int highestMarks(String paper_code, int year) throws SQLException {
 	    create_connection(); // Assuming this method creates a database connection
 	    ct.create_table();    // Assuming this method creates a table if not exists

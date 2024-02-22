@@ -1,6 +1,7 @@
 package transferobjects;
 
 public class Student {
+	
 	private String course;
 	private String paper_code;
 	private String paper_type;
@@ -9,6 +10,7 @@ public class Student {
 	private String dept;
 	private int full_marks;
 	private int marks_obtained;
+	
 	public Student(String course, String paper_code, String paper_type, String half, String roll, String dept,
 			int full_marks, int marks_obtained) {
 		super();

@@ -5,20 +5,19 @@ public class Student {
 	private String paper_code;
 	private String paper_type;
 	private String half;
-	private String coll;
-	private String cate;
-	private int number;
+	private String roll;
+	private String dept;
 	private int full_marks;
 	private int marks_obtained;
-	public Student(String course, String paper_code, String paper_type, String half, String coll, String cate,
-			int number, int full_marks, int marks_obtained) {
+	public Student(String course, String paper_code, String paper_type, String half, String roll, String dept,
+			int full_marks, int marks_obtained) {
+		super();
 		this.course = course;
 		this.paper_code = paper_code;
 		this.paper_type = paper_type;
 		this.half = half;
-		this.coll = coll;
-		this.cate = cate;
-		this.number = number;
+		this.roll = roll;
+		this.dept = dept;
 		this.full_marks = full_marks;
 		this.marks_obtained = marks_obtained;
 	}
@@ -46,23 +45,17 @@ public class Student {
 	public void setHalf(String half) {
 		this.half = half;
 	}
-	public String getColl() {
-		return coll;
+	public String getRoll() {
+		return roll;
 	}
-	public void setColl(String coll) {
-		this.coll = coll;
+	public void setRoll(String roll) {
+		this.roll = roll;
 	}
-	public String getCate() {
-		return cate;
+	public String getDept() {
+		return dept;
 	}
-	public void setCate(String cate) {
-		this.cate = cate;
-	}
-	public int getNumber() {
-		return number;
-	}
-	public void setNumber(int number) {
-		this.number = number;
+	public void setDept(String dept) {
+		this.dept = dept;
 	}
 	public int getFull_marks() {
 		return full_marks;
@@ -76,5 +69,7 @@ public class Student {
 	public void setMarks_obtained(int marks_obtained) {
 		this.marks_obtained = marks_obtained;
 	}
+	
+	
 	
 }

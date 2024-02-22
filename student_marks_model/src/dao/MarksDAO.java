@@ -45,6 +45,12 @@ public class MarksDAO implements MarksDetailsDAO {
 //		} 
 		return stu;
 	}
+	
+	public int highestMarks(String paper_code, int year) throws SQLException {
+		int h=0;
+		h = mr.highestMarks(paper_code,year);
+		return h;
+	}
 	@Override
 	public List<Student> getAll() throws SQLException {
 		// TODO Auto-generated method stub

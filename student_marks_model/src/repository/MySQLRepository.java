@@ -51,27 +51,37 @@ public class MySQLRepository implements StorageRepository{
 //	}
 	
 	
-	public int highestMarks(String paper_code, int year) throws SQLException {
-	    create_connection(); // Assuming this method creates a database connection
-	    ct.create_table();    // Assuming this method creates a table if not exists
+	public Marks highestMarks(String paper_code, int year) throws SQLException {
+	    create_connection();
+	    ct.create_table();   
 
+	    Marks marks = null;
 	    int h = 0;
-	    String str = "SELECT MAX(marks_obtained) AS highest_marks FROM `marks` WHERE `paper_code` = ? AND `year` = ?";
+	    String str = "SELECT MAX(marks_obtained) AS highest_marks, full_marks, paper_title, th_pr_ia, half, roll FROM `marks` WHERE `paper_code` = ? AND `year` = ?";
 
 	    try (PreparedStatement ps = cn.prepareStatement(str)) {
 	        ps.setString(1, paper_code);
 	        ps.setInt(2, year);
-
 	        try (ResultSet rs = ps.executeQuery()) {
 	            if (rs.next()) {
 	                h = rs.getInt("highest_marks");
+
+	                // You can access other columns as well
+	                int fullMarks = rs.getInt("full_marks");
+	                String paperTitle = rs.getString("paper_title");
+	                String exam_type = rs.getString("th_pr_ia");
+	                String roll = rs.getString("roll");
+	                
+	                String yearS = String.valueOf(year);
+	                String fullMarksS = String.valueOf(fullMarks);
+	                String highestMarks = String.valueOf(h);
+	                marks = new Marks(paper_code, yearS, fullMarksS, highestMarks, paperTitle, exam_type, roll);	                
 	            }
 	        }
 	    }
 
-	    return h;
+	    return marks;
 	}
-	
 	public void create_connection() throws SQLException{
 		DatabaseDAO create_con = new DatabaseDAO();
 		 cn = create_con.getConnection();

@@ -38,13 +38,12 @@ public class UserRepository extends BaseRepository{
 
 	@Override
 	public void storeSem(int semNum, String semYear, List<String> rollList) {
-		// TODO Auto-generated method stub
-		
+		// TODO Auto-generated method stub	
 	}
 
 	@Override
-	public int highestMarks(String s, int n) throws SQLException {
+	public Marks highestMarks(String s, int n) throws SQLException {
 		// TODO Auto-generated method stub
-		return 0;
+		return null;
 	}
 }

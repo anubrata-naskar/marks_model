@@ -10,6 +10,6 @@ interface StorageRepository {
 	public void addDetails(List<Student> studentList);
 	public void addDetails(int sem, String semYear, List<String> rollList);
 	public void addMarksDetails(List<Marks> marks);
-	public int highestMarks(String s, int n) throws SQLException;
+	public Marks highestMarks(String s, int n) throws SQLException;
 	
 }

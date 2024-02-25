@@ -79,7 +79,6 @@ public class MySQLRepository implements StorageRepository{
 	            }
 	        }
 	    }
-
 	    return marks;
 	}
 	public void create_connection() throws SQLException{
@@ -91,7 +90,7 @@ public class MySQLRepository implements StorageRepository{
 			System.out.println("Connection failed");
 		}
 	
-	public void addDetails(List<Student> studentList) {
+	public void addDetails(List<Student> studentList) throws SQLException {
 		try {
 			create_connection();
 			ct.create_table();
@@ -107,27 +106,27 @@ public class MySQLRepository implements StorageRepository{
 					int rowCount = stmt.executeUpdate();
 				}	
 			}
+			System.out.println("add student details");
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
 		
 	}
 	
-	public void addDetails(int sem, String semYear, List<String> rollList) {
+public void addDetails(int sem, String semYear, List<String> rollList) throws SQLException{
 		
 		try {
 			create_connection();
 			ct.create_table();
 			for(String roll:rollList) {
 				//System.out.println(roll);
-				PreparedStatement stm = cn.prepareStatement("SELECT * from `sem_details` where sem_number like ? and sem_year like ? and roll like ?" );
+				PreparedStatement stm = cn.prepareStatement("SELECT * from sem_details where sem_number like ? and sem_year like ? and roll like ?" );
 				stm.setInt(1, sem);
 				stm.setString(2, semYear);
 				stm.setString(3, roll);
 				ResultSet res = stm.executeQuery();
-				res.next();
 				if(!res.next()) {
-					PreparedStatement stmt = cn.prepareStatement("INSERT INTO `sem_details`(sem_number,sem_year,roll) VALUES (?,?,?)");
+					PreparedStatement stmt = cn.prepareStatement("INSERT INTO sem_details(sem_number,sem_year,roll) VALUES (?,?,?)");
 					stmt.setInt(1, sem);
 					stmt.setString(2, semYear);
 					stmt.setString(3, roll);
@@ -140,7 +139,7 @@ public class MySQLRepository implements StorageRepository{
 		}
 	}
 	
-	private void updateDetails(int rowCount) {
+	private void updateDetails(int rowCount) throws SQLException{
 		if(rowCount<=0) {
 			System.out.print("problem");
 		}
@@ -149,36 +148,43 @@ public class MySQLRepository implements StorageRepository{
 	//problem_sweta
 	
 	@Override
-	public void addMarksDetails(List<Marks> marks) {
+	public void addMarksDetails(List<Marks> marks) throws SQLException{
 		try {
 			create_connection();
 			ct.create_table();
 			PreparedStatement stmt;
 			for(Marks mark : marks) {
-				PreparedStatement stm = cn.prepareStatement("SELECT s_id from `sem_details` where sem_year like ? and roll like ?" );
+				PreparedStatement stm = cn.prepareStatement("SELECT s_id from sem_details where sem_year like ? and roll like ?" );
 				stm.setString(1, mark.getSemYear());
 				stm.setString(2, mark.getRoll());
 				ResultSet res = stm.executeQuery();
-				res.next();
 				if(res.next()) {
-					stmt = cn.prepareStatement("INSERT INTO `marks` VALUES (?,?,?,?,?,?,?,?)");
-					stmt.setString(1, mark.getPaperCode());
-					stmt.setString(2, mark.getSemYear());
-					System.out.println("sid:"+res.getString(1));
-					stmt.setString(3, res.getString(1));
-					stmt.setString(4, mark.getFullMark());
-					int obMark;
-					if(mark.getObMark().equalsIgnoreCase("xx") || mark.getObMark().equalsIgnoreCase("absent")) {
-						obMark = 00;
+					PreparedStatement stm1 = cn.prepareStatement("SELECT * from marks where paper_code like ? and year like ? and s_id like ?" );
+					stm1.setString(1, mark.getPaperCode());
+					stm1.setInt(2, Integer.parseInt(mark.getSemYear()));
+					stm1.setInt(3, res.getInt(1));
+					ResultSet res1 = stm1.executeQuery();
+					if(!res1.next()) {
+						stmt = cn.prepareStatement("INSERT INTO marks VALUES (?,?,?,?,?,?,?,'null',?)");
+						stmt.setString(1, mark.getPaperCode());
+						stmt.setString(2, mark.getSemYear());
+						System.out.println("sid:"+res.getInt(1));
+						stmt.setString(3, res.getString(1));
+						stmt.setString(4, mark.getFullMark());
+						int obMark;
+						if(mark.getObMark().equalsIgnoreCase("xx") || mark.getObMark().equalsIgnoreCase("absent")) {
+							obMark = 00;
+						}
+						else {
+							obMark =Integer.parseInt(mark.getObMark());
+						}
+						stmt.setInt(5, obMark);
+						stmt.setString(6, mark.getPaperTitle());
+						stmt.setString(7, mark.getExamType());
+						stmt.setString(8, mark.getRoll());
+						int rowCount = stmt.executeUpdate();
+						updateDetails(rowCount);
 					}
-					else {
-						obMark =Integer.parseInt(mark.getObMark());
-					}
-					stmt.setInt(5, obMark);
-					stmt.setString(6, mark.getPaperTitle());
-					stmt.setString(7, mark.getExamType());
-					stmt.setString(8, mark.getRoll());
-					int rowCount = stmt.executeUpdate();
 				}
 			}
 		} catch (SQLException e) {

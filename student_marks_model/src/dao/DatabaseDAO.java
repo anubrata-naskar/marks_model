@@ -26,7 +26,7 @@ public class DatabaseDAO {
 				connection = DriverManager.getConnection(url,username,password);
 	    	return connection;
 	    }
-	    public void getExcelData(List<List<String>> xlData,String examDetails) {
+	    public void getExcelData(List<List<String>> xlData,String examDetails) throws SQLException {
 			String [] examdetails = examDetails.split("SEM");
 			String dept = examdetails[0].toLowerCase();
 			String [] semDetail = examdetails[1].split(" ");
@@ -50,9 +50,10 @@ public class DatabaseDAO {
 				marksList.add(new Marks(paperCode,semYear,fullMark,obMark,paperTitle,examType,roll));
 			}
 			BaseRepository marksRepo = new MarksRepository(new MySQLRepository());
-			marksRepo.storeSem(semNum,semYear,rollList);
-			marksRepo.storeDetails(marksList);
-			marksRepo.storeStudentDetails(studentList);
+				marksRepo.storeStudentDetails(studentList);
+				marksRepo.storeSem(semNum,semYear,rollList);
+				marksRepo.storeDetails(marksList);
+				
 		}
 		
 		  public static int romanToInt(String s)  

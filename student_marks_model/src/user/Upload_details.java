@@ -1,12 +1,15 @@
 package user;
 
 import java.io.FileInputStream;
+import java.sql.SQLException;
 import java.util.Iterator;
 
-//import org.apache.poi.sl.usermodel.Sheet;
-//import org.apache.poi.ss.usermodel.Cell;
-//import org.apache.poi.ss.usermodel.Row;
-//import org.apache.poi.xssf.usermodel.XSSFWorkbook;
+import org.apache.poi.sl.usermodel.Sheet;
+import org.apache.poi.ss.usermodel.Cell;
+import org.apache.poi.ss.usermodel.CellType;
+import org.apache.poi.ss.usermodel.Row;
+import org.apache.poi.xssf.usermodel.XSSFSheet;
+import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 
 import dao.Excel;
 
@@ -42,46 +45,10 @@ public class Upload_details {
 //		System.out.println("Makrs - "+marks);
 //} 
 		
-		
 
-//    public static void main(String[] args) {
-//    	String path = "C:\\Users\\Administrator\\Downloads\\BTECH 5TH SEMESTER 2023 CSCP506 100.xlsx";
-//    	int noOfStudent = 51;
-//    	new Excel().readExcel(path,noOfStudent);
-//        try {
-//            FileInputStream file = new FileInputStream(new File("C:\\Users\\\\Administrator\\Downloads\\BTECH 5TH SEMESTER 2023 CSCP506 100.xlsx"));
-//
-//            XSSFWorkbook workbook = new XSSFWorkbook(file);
-//            Sheet sheet = workbook.getSheetAt(0); // Assuming data is in the first sheet
-//
-//            Iterator<Row> rowIterator = sheet.iterator();
-//            while (rowIterator.hasNext()) {
-//                Row row = rowIterator.next();
-//
-//                // Start reading from the 10th row
-//                if (row.getRowNum() >= 9 ) {
-//                    Iterator<Cell> cellIterator = row.cellIterator();
-//
-//                    // Assuming data is in columns B to J
-//                    while (cellIterator.hasNext()) {
-//                        Cell cell = cellIterator.next();
-//                        if(cell.getColumnIndex() == 7)
-//                        	System.out.print((int)cell.getNumericCellValue() + "\t"); 
-//                        else
-//                        	System.out.print(cell.getStringCellValue() + "\t");
-//                        // Check for blank row
-////                        if (cell.getCellType() == CellType.BLANK) {
-////                            break; // Break if a blank cell is found
-////                        }
-//                        // Assuming data is numeric; modify as needed based on your data types
-//                    }
-//                    System.out.println(); // Move to the next line for the next row
-//                }
-//            }
-//            workbook.close();
-//            file.close();
-//        } catch (Exception e) {
-//            e.printStackTrace();
-//        }
-//    }
+	public static void main(String[] args) throws SQLException  {
+    	String path = "C:\\\\Users\\\\Administrator\\\\Downloads\\\\BTECH 5TH SEMESTER 2023 CSCP506 102.xlsx";
+    	int noOfStudent = 51;
+    	new Excel().readExcel(path,noOfStudent);
+    }
 }

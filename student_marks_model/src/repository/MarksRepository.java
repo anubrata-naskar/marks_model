@@ -24,16 +24,16 @@ public class MarksRepository extends BaseRepository{
 	}
 	
 	@Override
-	public void storeDetails(List<Marks> marks) {
+	public void storeDetails(List<Marks> marks) throws SQLException{
 		storage.addMarksDetails(marks);
 	}
 
-	public void storeStudentDetails(List<Student> studentList) {
+	public void storeStudentDetails(List<Student> studentList) throws SQLException{
 		storage.addDetails(studentList);
 	}
 	
 	@Override
-	public void storeSem(int semNum, String semYear, List<String> rollList) {
+	public void storeSem(int semNum, String semYear, List<String> rollList) throws SQLException {
 		storage.addDetails(semNum,semYear,rollList);
 	}
 	

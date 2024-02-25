@@ -57,30 +57,92 @@ public class MySQLRepository implements StorageRepository{
 
 	    Marks marks = null;
 	    int h = 0;
-	    String str = "SELECT MAX(marks_obtained) AS highest_marks, full_marks, paper_title, th_pr_ia, half, roll FROM `marks` WHERE `paper_code` = ? AND `year` = ?";
+	    
+	    String str = "SELECT marks_obtained, full_marks, paper_title, th_pr_ia, half, roll FROM `marks` WHERE `paper_code` = ? AND `year` = ? ORDER BY marks_obtained DESC LIMIT 1";
 
 	    try (PreparedStatement ps = cn.prepareStatement(str)) {
 	        ps.setString(1, paper_code);
 	        ps.setInt(2, year);
 	        try (ResultSet rs = ps.executeQuery()) {
 	            if (rs.next()) {
-	                h = rs.getInt("highest_marks");
+	                h = rs.getInt("marks_obtained");
 
-	                // You can access other columns as well
 	                int fullMarks = rs.getInt("full_marks");
 	                String paperTitle = rs.getString("paper_title");
 	                String exam_type = rs.getString("th_pr_ia");
 	                String roll = rs.getString("roll");
-	                
 	                String yearS = String.valueOf(year);
 	                String fullMarksS = String.valueOf(fullMarks);
 	                String highestMarks = String.valueOf(h);
-	                marks = new Marks(paper_code, yearS, fullMarksS, highestMarks, paperTitle, exam_type, roll);	                
+	                marks = new Marks(paper_code, yearS, fullMarksS, highestMarks, paperTitle, exam_type, roll);                
 	            }
 	        }
 	    }
 	    return marks;
 	}
+
+	
+	public Marks avgMarks(String paper_code, int year) throws SQLException {
+	    create_connection();
+	    ct.create_table();   
+
+	    Marks marks = null;
+	    double averageMarks = 0.0;
+
+	    String str = "SELECT AVG(marks_obtained) AS average_marks, full_marks, paper_title, th_pr_ia, half, roll FROM `marks` WHERE `paper_code` = ? AND `year` = ?";
+
+	    try (PreparedStatement ps = cn.prepareStatement(str)) {
+	        ps.setString(1, paper_code);
+	        ps.setInt(2, year);
+	        try (ResultSet rs = ps.executeQuery()) {
+	            if (rs.next()) {
+	                averageMarks = rs.getDouble("average_marks");
+	               // System.out.println(averageMarks);
+
+	                // You can access other columns as well
+	                int fullMarks = rs.getInt("full_marks");
+	                String paperTitle = rs.getString("paper_title");
+	                String exam_type = rs.getString("th_pr_ia");
+	                // If you want to include a placeholder for the roll since it's not available in AVG operation
+	                String roll = "null"; 
+
+	                String yearS = String.valueOf(year);
+	                String fullMarksS = String.valueOf(fullMarks);
+	                String averageMarksS = String.valueOf(averageMarks);
+	                marks = new Marks(paper_code, yearS, fullMarksS, averageMarksS, paperTitle, exam_type, roll);                
+	            }
+	        }
+	    }
+
+	    return marks;
+	}
+
+
+	public Marks qualify_perc(String paper_code, int year) throws SQLException {
+	    create_connection();
+	    ct.create_table();   
+
+	    Marks marks = null;
+	    String percentageQualified = null;
+
+	    String str = "SELECT CONCAT(ROUND((COUNT(CASE WHEN m.marks_obtained >= 25 THEN 1 END) / COUNT(*)) * 100),'%') AS percentage_qualified FROM `marks` m INNER JOIN `sem_details` sd ON m.s_id = sd.s_id INNER JOIN `students` s ON m.roll = s.roll WHERE m.paper_code = ?  AND m.year = ?";
+
+	    try (PreparedStatement ps = cn.prepareStatement(str)) {
+	        ps.setString(1, paper_code);
+	        ps.setInt(2, year);
+	        try (ResultSet rs = ps.executeQuery()) {
+	            if (rs.next()) {
+	                percentageQualified = rs.getString("percentage_qualified");
+	                //System.out.println(percentageQualified);
+	                String yearS = String.valueOf(year);
+	                marks = new Marks(paper_code, yearS, "null", percentageQualified, "null", "null", "null");               
+	            }
+	        }
+	    }
+	    return marks;
+	}
+
+	
 	public void create_connection() throws SQLException{
 		DatabaseDAO create_con = new DatabaseDAO();
 		 cn = create_con.getConnection();

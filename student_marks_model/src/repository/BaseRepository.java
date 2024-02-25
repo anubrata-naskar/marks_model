@@ -19,4 +19,6 @@ public abstract class BaseRepository {
 	public abstract void storeStudentDetails(List<Student> studentList) throws SQLException;
 	public abstract void storeSem(int semNum, String semYear, List<String> rollList) throws SQLException;
 	public abstract Marks highestMarks(String s, int n) throws SQLException;
+	public abstract Marks avgMarks(String s, int n) throws SQLException;
+	public abstract Marks qualify_perc(String s, int n) throws SQLException;
 }

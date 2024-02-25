@@ -8,9 +8,16 @@ import transferobjects.Marks;
 import transferobjects.Student;
 
 public class UserRepository extends BaseRepository{
-	
+
 	public UserRepository(StorageRepository storage) {
 		super(storage);
+		// TODO Auto-generated constructor stub
+	}
+
+	@Override
+	public void storeDetails(List<Marks> m) throws SQLException {
+		// TODO Auto-generated method stub
+		
 	}
 
 	@Override
@@ -24,21 +31,17 @@ public class UserRepository extends BaseRepository{
 		// TODO Auto-generated method stub
 		return null;
 	}
+
 	@Override
-	public void storeDetails(List<Marks> m) {
+	public void storeStudentDetails(List<Student> studentList) throws SQLException {
 		// TODO Auto-generated method stub
 		
 	}
 
 	@Override
-	public void storeStudentDetails(List<Student> studentList) {
+	public void storeSem(int semNum, String semYear, List<String> rollList) throws SQLException {
 		// TODO Auto-generated method stub
 		
-	}
-
-	@Override
-	public void storeSem(int semNum, String semYear, List<String> rollList) {
-		// TODO Auto-generated method stub	
 	}
 
 	@Override
@@ -46,4 +49,18 @@ public class UserRepository extends BaseRepository{
 		// TODO Auto-generated method stub
 		return null;
 	}
+
+	@Override
+	public Marks avgMarks(String s, int n) throws SQLException {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public Marks qualify_perc(String s, int n) throws SQLException {
+		// TODO Auto-generated method stub
+		return null;
+	}
+	
+	
 }

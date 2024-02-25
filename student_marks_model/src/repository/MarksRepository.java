@@ -41,4 +41,12 @@ public class MarksRepository extends BaseRepository{
 		Marks h = storage.highestMarks(s, n);
 		return h;
 	}
+	public Marks  avgMarks(String paper_code, int year) throws SQLException {
+		Marks h = storage.avgMarks(paper_code, year);
+		return h;
+	}
+	public Marks  qualify_perc(String paper_code, int year) throws SQLException {
+		Marks h = storage.qualify_perc(paper_code, year);
+		return h;
+	}
 }

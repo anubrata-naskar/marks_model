@@ -26,6 +26,16 @@ public class MarksDAO implements MarksDetailsDAO {
 		marks = mr.highestMarks(paper_code,year);
 		return marks;
 	}
+	public Marks avgMarks(String paper_code, int year) throws SQLException {
+		Marks marks = null;
+		marks = mr.avgMarks(paper_code,year);
+		return marks;
+	}
+	public Marks qualify_perc(String paper_code, int year) throws SQLException {
+		Marks marks = null;
+		marks = mr.qualify_perc(paper_code,year);
+		return marks;
+	}
 	@Override
 	public List<Student> getAll() throws SQLException {
 		// TODO Auto-generated method stub

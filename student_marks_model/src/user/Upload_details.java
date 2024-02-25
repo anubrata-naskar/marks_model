@@ -46,9 +46,13 @@ public class Upload_details {
 //} 
 		
 
+	//upload-details
 	public static void main(String[] args) throws SQLException  {
     	String path = "C:\\\\Users\\\\Administrator\\\\Downloads\\\\BTECH 5TH SEMESTER 2023 CSCP506 102.xlsx";
     	int noOfStudent = 51;
     	new Excel().readExcel(path,noOfStudent);
     }
+	//upload-details
+	
+	
 }

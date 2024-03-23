@@ -46,7 +46,7 @@ public class Upload_details {
 //} 
 //https://github.com/anubrata-naskar/marks_model.git
 	//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
-//ok
+//done
 	//upload-detailsgg
 	public static void main(String[] args) throws SQLException  {
     	String path = "C:\\\\Users\\\\Administrator\\\\Downloads\\\\BTECH 5TH SEMESTER 2023 CSCP506 102.xlsx";

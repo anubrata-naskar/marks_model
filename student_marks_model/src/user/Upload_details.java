@@ -44,7 +44,8 @@ public class Upload_details {
 //		System.out.println("Num - "+num);
 //		System.out.println("Makrs - "+marks);
 //} 
-		
+//https://github.com/anubrata-naskar/marks_model.git
+	//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
 
 	//upload-details
 	public static void main(String[] args) throws SQLException  {

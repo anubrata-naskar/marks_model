@@ -36,6 +36,13 @@ public class MarksDAO implements MarksDetailsDAO {
 		marks = mr.qualify_perc(paper_code,year);
 		return marks;
 	}
+	
+	//marks-sheet generate
+	public Marks marks_sheet_gen(String roll) throws SQLException {
+		Marks marks = null;
+		marks = mr.marks_sheet_gen(roll);
+		return marks;
+	}
 	@Override
 	public List<Student> getAll() throws SQLException {
 		// TODO Auto-generated method stub

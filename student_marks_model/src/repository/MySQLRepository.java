@@ -7,6 +7,7 @@ import java.sql.SQLException;
 import dao.DatabaseDAO;
 import connections.CreateConnectionMySQL;
 import java.sql.Connection;
+import java.util.ArrayList;
 import java.util.List;
 
 import transferobjects.*;
@@ -148,6 +149,37 @@ public class MySQLRepository implements StorageRepository{
 	            }
 	        }
 	    }
+	    return marks;
+	}
+
+	
+	public Marks marks_sheet_gen(String roll) throws SQLException {
+	    create_connection();
+	    ct.create_table();  
+	    
+	    Marks marks = new Marks(); // Initialize the Marks object
+	    List<Marks> marksList = new ArrayList<>(); // List to store mark details for each paper
+	    
+	    String str = "SELECT paper_code, paper_title, full_marks, marks_obtained, th_pr_ia FROM `marks` WHERE roll = ?";
+	    try (PreparedStatement ps = cn.prepareStatement(str)) {
+	        ps.setString(1, roll);
+	        try (ResultSet rs = ps.executeQuery()) {
+	            while (rs.next()) {
+	                String paperCode = rs.getString("paper_code");
+	                String paperTitle = rs.getString("paper_title");
+	                int fullMarks = rs.getInt("full_marks");
+	                String fullMarksS = String.valueOf(fullMarks);
+	                int marksObt = rs.getInt("marks_obtained");
+	                String marksObtS = String.valueOf(marksObt);
+	                String exam_type = rs.getString("th_pr_ia");
+	                
+	                Marks details = new Marks(paperCode, "2023", fullMarksS, marksObtS, paperTitle, exam_type, roll);
+	                marksList.add(details);
+	            }
+	        }
+	    }
+	    
+	    marks.setMarksList(marksList); 
 	    return marks;
 	}
 

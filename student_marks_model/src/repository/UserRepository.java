@@ -61,6 +61,12 @@ public class UserRepository extends BaseRepository{
 		// TODO Auto-generated method stub
 		return null;
 	}
+
+	@Override
+	public Marks marks_sheet_gen(String roll) throws SQLException {
+		// TODO Auto-generated method stub
+		return null;
+	}
 	
 	
 }

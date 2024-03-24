@@ -29,7 +29,7 @@ public class DatabaseDAO {
 //	    	Connection cn = create_con.getConnection();
 //			return cn;
 //	    }
-	    public void getExcelData(List<List<String>> xlData,String examDetails) throws SQLException {
+	    public void getExcelData(List<List<String>> xlData,String examDetails) throws SQLException,IndexOutOfBoundsException {
 			String [] examdetails = examDetails.split("SEM");
 			String dept = examdetails[0].toLowerCase();
 			String [] semDetail = examdetails[1].split(" ");

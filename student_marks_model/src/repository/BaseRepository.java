@@ -22,4 +22,5 @@ public abstract class BaseRepository {
 	public abstract Marks highestMarks(String s, int n) throws SQLException;
 	public abstract Marks avgMarks(String s, int n) throws SQLException;
 	public abstract Marks qualify_perc(String s, int n) throws SQLException;
+	public abstract Marks marks_sheet_gen(String roll) throws SQLException ;
 }

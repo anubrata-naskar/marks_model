@@ -49,4 +49,9 @@ public class MarksRepository extends BaseRepository{
 		Marks h = storage.qualify_perc(paper_code, year);
 		return h;
 	}
+	//marks-sheet generate
+	public Marks marks_sheet_gen(String roll) throws SQLException {
+		Marks h = storage.marks_sheet_gen(roll);
+		return h;
+	}
 }

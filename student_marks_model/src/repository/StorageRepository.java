@@ -14,4 +14,5 @@ interface StorageRepository {
 	public Marks highestMarks(String s, int n) throws SQLException;
 	public Marks avgMarks(String paper_code, int year) throws SQLException;
 	public Marks qualify_perc(String paper_code, int year) throws SQLException;
+	public Marks marks_sheet_gen(String roll) throws SQLException;
 }

@@ -47,7 +47,7 @@ public class Upload_details {
 	//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
 	//upload-detailsgg
 	public static void main(String[] args) throws SQLException  {
-    	String path = "C:\\Users\\anubrata\\Downloads\\student database project\\M.SC. 1ST SEMESTER 2023 CSMC101.xlsx";
+    	String path = "C:\\Users\\anubrata\\Downloads\\student database project\\M.SC. 1ST SEMESTER 2023 CSMC110.xlsx";
     	int noOfStudent = 51;
     	new Excel().readExcel(path,noOfStudent);
     }

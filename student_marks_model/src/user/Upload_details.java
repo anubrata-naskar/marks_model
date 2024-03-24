@@ -11,8 +11,6 @@ import org.apache.poi.ss.usermodel.Row;
 import org.apache.poi.xssf.usermodel.XSSFSheet;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 
-import dao.Excel;
-
 public class Upload_details {
 	
 	   // Creating an ArrayList of Strings
@@ -44,12 +42,12 @@ public class Upload_details {
 //		System.out.println("Num - "+num);
 //		System.out.println("Makrs - "+marks);
 //} 
-//https://github.com/anubrata-naskar/marks_model.git
-	//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
-//doneee
+	
+	
+	//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
 	//upload-detailsgg
 	public static void main(String[] args) throws SQLException  {
-    	String path = "C:\\\\Users\\\\Administrator\\\\Downloads\\\\BTECH 5TH SEMESTER 2023 CSCP506 102.xlsx";
+    	String path = "C:\\Users\\anubrata\\Downloads\\student database project\\M.SC. 1ST SEMESTER 2023 CSMC101.xlsx";
     	int noOfStudent = 51;
     	new Excel().readExcel(path,noOfStudent);
     }

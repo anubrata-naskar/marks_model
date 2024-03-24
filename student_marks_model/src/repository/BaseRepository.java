@@ -6,6 +6,7 @@ import java.util.List;
 
 import transferobjects.Marks;
 import transferobjects.Student;
+import connections.*;
 
 public abstract class BaseRepository {
 	protected StorageRepository storage;

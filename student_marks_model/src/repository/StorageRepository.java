@@ -3,6 +3,7 @@ package repository;
 import java.sql.SQLException;
 import java.util.List;
 import transferobjects.*;
+import connections.*;
 
 interface StorageRepository {
 	public String addDetails();

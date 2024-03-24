@@ -1,4 +1,4 @@
-package dao;
+package user;
 
 import java.io.FileInputStream;
 import java.sql.SQLException;
@@ -11,6 +11,8 @@ import org.apache.poi.ss.usermodel.Row;
 import org.apache.poi.ss.usermodel.Sheet;
 import org.apache.poi.ss.usermodel.Workbook;
 import org.apache.poi.ss.usermodel.WorkbookFactory;
+
+import dao.DatabaseDAO;
 
 public class Excel {
     private List<List<String>> xlData = new ArrayList<>();
@@ -29,7 +31,7 @@ public class Excel {
             Row row1 = sheet.getRow(7);
             Cell c = row1.getCell(2);
             examDetails= c.getStringCellValue();
-            //sweta
+            
             for (int rowNum = 9; rowNum < noOfStudent; rowNum++) {
             	List<String> cols_data = new ArrayList<>();
                 Row row = sheet.getRow(rowNum);
@@ -61,7 +63,7 @@ public class Excel {
         	}
         }
         new DatabaseDAO().getExcelData(xlData,examDetails);
-        //sweta
+        
     }
     
 }

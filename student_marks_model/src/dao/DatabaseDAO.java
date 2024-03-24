@@ -12,20 +12,23 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import connections.CreateConnectionMySQL;
+
 public class DatabaseDAO {
 	private List<Student> studentList = new ArrayList<Student>();
 	private List<Marks> marksList = new ArrayList<Marks>();
 	private List<String> rollList = new ArrayList<String>();
 	
-	  private String url = "jdbc:mysql://localhost:3306/stu_project";
-	    private String username = "root";
-	    private String password = "";
-	    private Connection connection = null;
-	    
-	    public Connection getConnection() throws SQLException {
-				connection = DriverManager.getConnection(url,username,password);
-	    	return connection;
-	    }
+//	  private String url = "jdbc:mysql://localhost:3306/stu_project";
+//	    private String username = "root";
+//	    private String password = "";
+//	    private Connection connection = null;
+//	    
+//	    public Connection getConnection() throws SQLException {
+//	    	CreateConnectionMySQL create_con = new CreateConnectionMySQL();
+//	    	Connection cn = create_con.getConnection();
+//			return cn;
+//	    }
 	    public void getExcelData(List<List<String>> xlData,String examDetails) throws SQLException {
 			String [] examdetails = examDetails.split("SEM");
 			String dept = examdetails[0].toLowerCase();

@@ -4,21 +4,30 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
-import dao.CreateTable;
 import dao.DatabaseDAO;
-
+import connections.CreateConnectionMySQL;
 import java.sql.Connection;
-
 import java.util.List;
-
-import dao.CreateTable;
-import dao.DatabaseDAO;
 
 import transferobjects.*;
 
 public class MySQLRepository implements StorageRepository{
 	Connection cn;
 	CreateTable ct = new CreateTable();
+	
+//	public void create_connection() throws SQLException{
+//		DatabaseDAO create_con = new DatabaseDAO();
+//		 cn = create_con.getConnection();
+//		if(cn != null)
+//			System.out.println("Connection create successfull");
+//		else
+//			System.out.println("Connection failed");
+//		}
+	
+	public void create_connection() throws SQLException{
+		CreateConnectionMySQL create_con = new CreateConnectionMySQL();
+		cn = create_con.getConnection();
+	}
 	public String addDeltails() {
 		String str = "add details";
 		return str;
@@ -143,15 +152,6 @@ public class MySQLRepository implements StorageRepository{
 	}
 
 	
-	public void create_connection() throws SQLException{
-		DatabaseDAO create_con = new DatabaseDAO();
-		 cn = create_con.getConnection();
-		if(cn != null)
-			System.out.println("Connection create successfull");
-		else
-			System.out.println("Connection failed");
-		}
-	
 	public void addDetails(List<Student> studentList) throws SQLException {
 		try {
 			create_connection();
@@ -173,7 +173,7 @@ public class MySQLRepository implements StorageRepository{
 			e.printStackTrace();
 		}
 		
-	}
+}
 	
 public void addDetails(int sem, String semYear, List<String> rollList) throws SQLException{
 		

@@ -1,29 +1,24 @@
-package dao;
+package repository;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
-
 import com.mysql.cj.xdevapi.Statement;
-
-// token  - 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
-
-import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
 
+import connections.CreateConnectionMySQL;
+import java.sql.Connection;
 
-// token  - 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
+
 public class CreateTable {
 	public void create_table() {
         try {
-            // JDBC URL, username, and password of MySQL server
-            String url = "jdbc:mysql://localhost:3306/stu_project";
-            String user = "root";
-            String password = "";
+        	Connection cn;
+        	CreateConnectionMySQL create_con = new CreateConnectionMySQL();
+    		cn = create_con.getConnection();
 
-            Connection connection = DriverManager.getConnection(url, user, password);
-            java.sql.Statement statement = connection.createStatement();
+            java.sql.Statement statement = cn.createStatement();
 
             String createStudentsTableQuery = "CREATE TABLE IF NOT EXISTS students (" +
                   "roll VARCHAR(255)," +
@@ -62,7 +57,7 @@ public class CreateTable {
             System.out.println("Tables created successfully!");
 
             statement.close();
-            connection.close();
+            cn.close();
         } catch (SQLException e) {
             e.printStackTrace();
         }

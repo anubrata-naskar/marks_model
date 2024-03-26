@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import java.util.List;
 import transferobjects.Marks;
 import transferobjects.Student;
+import transferobjects.User;
 
 public abstract class BaseRepository {
 	protected StorageRepository storage;
@@ -22,4 +23,9 @@ public abstract class BaseRepository {
 	public abstract Marks marks_sheet_gen(String roll, String year, String sem) throws SQLException ;
 	public abstract Marks getAbsentStudent(String paperCode, String year) throws SQLException;
 	public abstract Marks getFailedStudents(String subCode, String examType, String year, int passPerc) throws SQLException;
+
+	public abstract User check(String username,String pass);
+	public abstract User verify(String mail);
+	public abstract void modifyP(String encrypted_pass, String mail);
+	public abstract void storedata(String name, String email, String username, String encrypted_pass);
 }

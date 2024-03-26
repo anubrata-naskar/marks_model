@@ -13,7 +13,6 @@ import org.apache.pdfbox.pdmodel.font.PDType1Font;
 
 import dao.*;
 import transferobjects.*;
-//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
 public class FetchFromDatabase {
 	MarksDAO ma = new MarksDAO();
 	public Marks getAvgMarks(String paperCode, String year) {
@@ -153,7 +152,8 @@ public class FetchFromDatabase {
 	public List<Marks> getFailedStudents(String subCode, String examType, String year, String passPerc) {
 		Marks l = null;
 		try {
-			l = ma.getFailedStudents("csmc101", "th", "2023", 60);
+			int x =Integer.parseInt(passPerc);
+			l = ma.getFailedStudents(subCode, examType, year, x  );
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

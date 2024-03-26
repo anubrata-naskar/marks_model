@@ -1,27 +1,13 @@
 package transferobjects;
 
 public class User {
-	private String userName, password;
-
-	public User(String userName, String password) {
-		super();
-		this.userName = userName;
-		this.password = password;
+	private boolean present;
+	String name,email,password,username;
+	public User(boolean present){
+		this.present=present;
 	}
-
-	public String getUserName() {
-		return userName;
+	
+	public boolean getPresent() {
+		return present;
 	}
-
-	public void setUserName(String userName) {
-		this.userName = userName;
-	}
-
-	public String getPassword() {
-		return password;
-	}
-
-	public void setPassword(String password) {
-		this.password = password;
-	} 
 }

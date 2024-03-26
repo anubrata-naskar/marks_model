@@ -6,13 +6,42 @@ import java.util.List;
 
 import transferobjects.Marks;
 import transferobjects.Student;
+import transferobjects.User;
 
 public class UserRepository extends BaseRepository{
+	
 
 	public UserRepository(StorageRepository storage) {
 		super(storage);
-		// TODO Auto-generated constructor stub
 	}
+	
+	
+	public User check(String username,String pass) {
+		User che=storage.checkLogin(username,pass);
+		return che;
+	}
+	
+	
+	public User verify(String mail) {
+		User mave=storage.verifyMail(mail);
+		return mave;
+	}
+
+
+	@Override
+	public void modifyP(String encrypted_pass, String mail) {
+		storage.modifyPassword(encrypted_pass,mail);
+	}
+	
+	
+
+	@Override
+	public void storedata(String name, String email, String username, String encrypted_pass) {
+		storage.storeAdminDetails(name,email,username,encrypted_pass);
+	}
+
+
+	//unnecessary
 
 	@Override
 	public void storeDetails(List<Marks> m) throws SQLException {
@@ -74,6 +103,8 @@ public class UserRepository extends BaseRepository{
 		// TODO Auto-generated method stub
 		return null;
 	}
+
+
 	
 	
 }

@@ -21,7 +21,7 @@ public class CreateTable {
                   "PRIMARY KEY (roll))";
             
             statement.executeUpdate(createStudentsTableQuery);
-            
+
             String createSemDetailsTableQuery = "CREATE TABLE IF NOT EXISTS sem_details (" +
                     "s_id INT AUTO_INCREMENT PRIMARY KEY," +
                     "sem_number INT," +
@@ -48,6 +48,14 @@ public class CreateTable {
                   "FOREIGN KEY (roll) REFERENCES students(roll))";
             
             statement.executeUpdate(createMarksTableQuery);
+            
+            String admin = "CREATE TABLE IF NOT EXISTS admin (" +
+                    "name VARCHAR(200)," +
+                    "email VARCHAR(200)," +
+                    "username VARCHAR(200)," +
+                    "password VARCHAR(200)," +
+                    "PRIMARY KEY (email))";;
+            statement.executeUpdate(admin);
 
             System.out.println("Tables created successfully!");
 

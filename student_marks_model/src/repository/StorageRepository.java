@@ -15,4 +15,8 @@ interface StorageRepository {
 	public Marks marks_sheet_gen(String roll, String year, String sem) throws SQLException;
 	public Marks getAbsentStudent(String paperCode, String year) throws SQLException;
 	public Marks getFailedStudents(String subCode, String examType, String year, int passPerc) throws SQLException;
+	public User checkLogin(String username,String pass);
+	public User verifyMail(String mail);
+	public void modifyPassword(String encrypted_pass, String mail);
+	public void storeAdminDetails(String name, String email, String username, String encrypted_pass);
 }

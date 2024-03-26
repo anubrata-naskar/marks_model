@@ -171,6 +171,7 @@ public class FailedStudents extends javax.swing.JFrame {
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {                                         
         // TODO add your handling code here:
     	FetchFromDatabase data = new FetchFromDatabase();
+    	System.out.println(textField1.getText()+textField3.getText()+textField2.getText()+textField4.getText());
     	List<Marks> x = data.getFailedStudents(textField1.getText(),textField3.getText(),textField2.getText(),textField4.getText());
     	 textArea1.setText("Papaer Code   Full Marks  Obtained Marks   Roll      Paper Title\n");
     	//textArea1.setText(textField1.getText());

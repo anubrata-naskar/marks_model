@@ -6,6 +6,7 @@ import java.util.List;
 
 import transferobjects.Marks;
 import transferobjects.Student;
+import transferobjects.User;
 
 public class MarksRepository extends BaseRepository{
 	
@@ -63,5 +64,29 @@ public class MarksRepository extends BaseRepository{
 	public Marks getFailedStudents(String subCode, String examType, String year, int passPerc) throws SQLException {
 		Marks h = storage.getFailedStudents(subCode, examType, year, passPerc);
 		return h;
+	}
+
+	@Override
+	public User check(String username, String pass) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public User verify(String mail) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public void modifyP(String encrypted_pass, String mail) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void storedata(String name, String email, String username, String encrypted_pass) {
+		// TODO Auto-generated method stub
+		
 	}
 }

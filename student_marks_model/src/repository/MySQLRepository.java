@@ -3,10 +3,14 @@ package repository;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
+
 import connections.CreateConnectionMySQL;
 import java.sql.Connection;
 import java.util.ArrayList;
 import java.util.List;
+
+import javax.swing.JOptionPane;
 
 import transferobjects.*;
 
@@ -361,6 +365,111 @@ public void addDetails(int sem, String semYear, List<String> rollList) throws SQ
 	public Student getAllDetails(String coll, String cate, int number, String section) throws SQLException {
 		// TODO Auto-generated method stub
 		return null;
+	}
+	@Override
+	public User checkLogin(String uname,String passl) {
+		    ct.create_table(); 
+		boolean userFound =false;
+		try {
+			CreateConnectionMySQL obj=new CreateConnectionMySQL();
+			Connection connection=obj.getConnection();
+			Statement statement = connection.createStatement();
+			
+
+			String sql = "select username,password from admin where username='" + uname + "'";
+			ResultSet resultSet = statement.executeQuery(sql);
+
+			userFound = false;
+
+			while (resultSet.next()) {
+				String loadedUsername = resultSet.getString("username");
+				String loadedPassword = resultSet.getString("password");
+
+				if (uname.equals(loadedUsername) && passl.equals(loadedPassword)) {
+					userFound = true;
+					break;
+				}
+			}
+
+		} catch (Exception e) {
+			e.printStackTrace();
+			JOptionPane.showMessageDialog(null, e);
+		}
+		User u=new User(userFound);
+		return u;
+		//return userFound;
+	}
+	
+	public User verifyMail(String mail) {
+		    ct.create_table(); 
+		boolean userFound = false;
+
+		try {
+			CreateConnectionMySQL obj=new CreateConnectionMySQL();
+			Connection connection=obj.getConnection();
+			Statement statement = (Statement) connection.createStatement();
+			String sql = "SELECT email FROM admin WHERE email='" + mail + "'";
+			ResultSet resultSet = statement.executeQuery(sql);
+
+			while (resultSet.next()) {
+				String loadedemail = resultSet.getString("email");
+
+				if (mail.equals(loadedemail)) {
+					userFound = true;
+					break;
+				}
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+			JOptionPane.showMessageDialog(null, e);
+		}
+		User u=new User(userFound);
+		return u;
+	}
+	@Override
+	public void modifyPassword(String encrypted_pass, String mail) {
+		    ct.create_table(); 
+		try {
+			CreateConnectionMySQL obj=new CreateConnectionMySQL();
+			Connection connection=obj.getConnection();
+			Statement statement = connection.createStatement();
+
+			String sql = "UPDATE admin SET password='" + encrypted_pass + "' WHERE email='" + mail + "'";
+			int rowsAffected = statement.executeUpdate(sql);
+
+			if (rowsAffected > 0) {
+				JOptionPane.showMessageDialog(null, "Password Updated Successfully..!");
+			} else {
+				JOptionPane.showMessageDialog(null, "Failed to update password. User not found.");
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+			JOptionPane.showMessageDialog(null, e);
+		}
+	}
+	@Override
+	public void storeAdminDetails(String name, String email, String username, String encrypted_pass) {
+		    ct.create_table(); 
+		try {
+			CreateConnectionMySQL obj=new CreateConnectionMySQL();
+			Connection connection=obj.getConnection();
+			Statement statement = (Statement) connection.createStatement();
+			String sql = "insert into admin (name, email, username, password) values ('" + name + "', '" + email
+					+ "', '" + username + "', '" + encrypted_pass + "')";
+
+			int rowsAffected = statement.executeUpdate(sql);
+
+			if (rowsAffected > 0) {
+				JOptionPane.showMessageDialog(null, "Admin data inserted successfully in database..!!");
+			} else {
+				JOptionPane.showMessageDialog(null, "Insertion failed!");
+			}
+
+		} catch (Exception e) {
+			e.printStackTrace();
+			JOptionPane.showMessageDialog(null, e);
+		}
+		
 	}
 	
 }

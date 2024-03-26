@@ -35,5 +35,6 @@
 	<classpathentry kind="lib" path="C:/Users/anubrata/Downloads/pdf jars/fontbox-2.0.13.jar"/>
 	<classpathentry kind="lib" path="C:/Users/anubrata/Downloads/pdf jars/pdfbox-2.0.13.jar"/>
 	<classpathentry kind="lib" path="C:/Users/anubrata/Downloads/pdf jars/pdfbox-tools-2.0.13.jar"/>
+	<classpathentry kind="lib" path="C:/Users/anubrata/Downloads/update marks/mail jar/mail.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>

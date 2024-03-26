@@ -137,7 +137,7 @@ public class FetchingOptions extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
-        FailedStudent fs = new FailedStudent();
+        FailedStudents fs = new FailedStudents();
         fs.setVisible(true);
         this.dispose();
     }//GEN-LAST:event_jButton4ActionPerformed

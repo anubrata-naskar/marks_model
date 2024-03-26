@@ -50,8 +50,8 @@ public class AbsentStudent extends JFrame {
 		year.setBounds(193, 52, 98, 22);
 		contentPane.add(year);
 		
-		JTextPane result = new JTextPane();
-		result.setBounds(87, 147, 249, 82);
+		JTextArea result = new JTextArea();
+		result.setBounds(10, 154, 420, 97);
 		result.setEditable(false);
 		contentPane.add(result);
 		
@@ -73,9 +73,9 @@ public class AbsentStudent extends JFrame {
             	result.setText("");
             	if(year.getText() !=null && subcode.getText() != null) {
             		List<Marks> markList = new FetchFromDatabase().getAbsentStudents(subcode.getText().trim().toLowerCase(), year.getText().trim().toLowerCase());
-            		for(Marks mark : markList)
-            		result.setText("Roll: "+mark.getRoll()+"\nYear: "+mark.getSemYear()+"\nPaper Code: "+mark.getPaperCode()+
-                			"\nPaper Title: "+mark.getPaperTitle()+"\nHighest: "+mark.getObMark());
+            		for (Marks details : markList) {
+                  		 result.append( details.getPaperCode() + "     "+ details.getFullMark()+"      "+ details.getRoll()+"    "+details.getPaperTitle()+"\n");
+                       }
             	}
             }
         });

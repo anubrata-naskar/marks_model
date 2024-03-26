@@ -63,8 +63,8 @@ public class GenerateMarksheet extends JFrame {
 		genMarksheet.setBounds(101, 106, 89, 23);
 		contentPane.add(genMarksheet);
 		
-		JTextPane result = new JTextPane();
-		result.setBounds(79, 154, 263, 97);
+		JTextArea result = new JTextArea();
+		result.setBounds(10, 154, 420, 97);
 		result.setEditable(false);
 		contentPane.add(result);
 		
@@ -81,11 +81,10 @@ public class GenerateMarksheet extends JFrame {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
             	result.setText("");
             	if(roll.getText() !=null && year.getText() != null && sem.getText() != null) {
-            		List<Marks> marksList = new FetchFromDatabase().generatePDF(roll.getText().trim().toLowerCase(), year.getText().trim().toLowerCase(),sem.getText().trim().toLowerCase());
-            		for(Marks marks : marksList) {
-            			result.setText("\tPaper Code: "+marks.getPaperCode()+
-                    			"\tPaper Title: "+marks.getPaperTitle()+"\tFull Marks: "+marks.getFullMark()+"\tObtained Marks: "+marks.getObMark());
-            		}
+            		List<Marks> x = new FetchFromDatabase().generatePDF(roll.getText().trim().toLowerCase(), year.getText().trim().toLowerCase(),sem.getText().trim().toLowerCase());
+            		for (Marks details : x) {
+               		 result.append( details.getPaperCode() + "     "+ details.getFullMark()+"      "+ details.getObMark()+"     "+details.getRoll()+"    "+details.getPaperTitle()+"\n");
+                    }
             	}
             }
         });

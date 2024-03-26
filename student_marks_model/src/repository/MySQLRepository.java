@@ -224,30 +224,22 @@ public class MySQLRepository implements StorageRepository{
 	    Marks marks = new Marks(); // Initialize the Marks object
 	    List<Marks> marksList = new ArrayList<>(); // List to store mark details for each paper
 	    
-	    String str = "SELECT full_marks FROM marks WHERE paper_code LIKE ? AND year = ? AND th_pr_ia= ? LIMIT 1;";
+	    String str = "SELECT roll, paper_title, full_marks, th_pr_ia, marks_obtained FROM marks WHERE paper_code LIKE ? AND th_pr_ia = ? AND year= ? AND marks_obtained < ?";
 	    try (PreparedStatement ps = cn.prepareStatement(str)) {
 	        ps.setString(1, subCode);
-	        ps.setString(3, examType);
-	        ps.setString(2, year);
+	        ps.setString(2, examType);
+	        ps.setString(3, year);
+	        ps.setInt(4, passPerc);
 	        try (ResultSet rs = ps.executeQuery()) {
 	            while (rs.next()) {
+	            	String roll = rs.getString("roll");
+	                String paperTitle = rs.getString("paper_title");
 	                int fullMarks = rs.getInt("full_marks");
 	                String fullMarksS = String.valueOf(fullMarks);
-	                int passMark = (passPerc/100)*fullMarks;
-	                str = "SELECT roll,paper_code,marks_obtained FROM marks WHERE marks_obtained < ?";
-	        	    try (PreparedStatement ps1 = cn.prepareStatement(str)) {
-	        	        ps1.setInt(1, passMark);
-	        	        try (ResultSet rs1 = ps1.executeQuery()) {
-	        	            while (rs1.next()) {
-	        	            	int obMark = rs1.getInt("marks_obtained");
-	        	            	String obMarks = String.valueOf(obMark);
-	        	            	String paperTitle = rs1.getString("paper_title");
-	        	            	String roll = rs1.getString("roll");
-	        	            	Marks details = new Marks(subCode, year, fullMarksS, obMarks, paperTitle, examType, roll);
-	        	                marksList.add(details);
-	        	            }
-	        	        }
-	        	    }
+	                String exam_type = rs.getString("th_pr_ia");
+	                String obMarks = rs.getString("marks_obtained");
+	                Marks details = new Marks(subCode, year, fullMarksS, obMarks, paperTitle, exam_type, roll);
+	                marksList.add(details);
 	            }
 	        }
 	    }

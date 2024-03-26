@@ -13,7 +13,7 @@ import org.apache.pdfbox.pdmodel.font.PDType1Font;
 
 import dao.*;
 import transferobjects.*;
-
+//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
 public class FetchFromDatabase {
 	MarksDAO ma = new MarksDAO();
 	public Marks getAvgMarks(String paperCode, String year) {
@@ -114,7 +114,7 @@ public class FetchFromDatabase {
 		}
 	   return x;
 	}
-	public static void main(String args[]) throws SQLException {
+//	public static void main(String args[]) throws SQLException {
 		
 		
 		//fetch highest marks
@@ -136,7 +136,7 @@ public class FetchFromDatabase {
                                ", Full Marks: " + details.getFullMark() + ", Marks Obtained: " + details.getObMark());
         }**/
 		
-	}
+//	}
 
 	public List<Marks> getAbsentStudents(String paperCode, String year) {
 		Marks l = null;
@@ -153,14 +153,17 @@ public class FetchFromDatabase {
 	public List<Marks> getFailedStudents(String subCode, String examType, String year, String passPerc) {
 		Marks l = null;
 		try {
-			l = ma.getFailedStudents(subCode, examType, year, Integer.parseInt(passPerc));
+			l = ma.getFailedStudents("csmc101", "th", "2023", 60);
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		List<Marks> x = l.getMarksList();
+		for (Marks details : x) {
+            System.out.println("Paper code: " + details.getPaperCode() + ", Paper Title: " + details.getPaperTitle() +
+                               ", Full Marks: " + details.getFullMark() + ", Marks Obtained: " + details.getObMark()+ ", Rol: " + details.getRoll());
+        }
 		return x;
 	}
-	
 	
 }

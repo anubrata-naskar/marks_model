@@ -3,8 +3,6 @@ package repository;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-
-import dao.DatabaseDAO;
 import connections.CreateConnectionMySQL;
 import java.sql.Connection;
 import java.util.ArrayList;
@@ -69,12 +67,13 @@ public class MySQLRepository implements StorageRepository{
 	    int h = 0;
 	    
 	    String str = "SELECT marks_obtained, full_marks, paper_title, th_pr_ia, half, roll FROM `marks` WHERE `paper_code` = ? AND `year` = ? ORDER BY marks_obtained DESC LIMIT 1";
-
+	    System.out.println("himsr");
 	    try (PreparedStatement ps = cn.prepareStatement(str)) {
 	        ps.setString(1, paper_code);
 	        ps.setInt(2, year);
 	        try (ResultSet rs = ps.executeQuery()) {
 	            if (rs.next()) {
+	            	
 	                h = rs.getInt("marks_obtained");
 
 	                int fullMarks = rs.getInt("full_marks");
@@ -84,7 +83,8 @@ public class MySQLRepository implements StorageRepository{
 	                String yearS = String.valueOf(year);
 	                String fullMarksS = String.valueOf(fullMarks);
 	                String highestMarks = String.valueOf(h);
-	                marks = new Marks(paper_code, yearS, fullMarksS, highestMarks, paperTitle, exam_type, roll);                
+	                marks = new Marks(paper_code, yearS, fullMarksS, highestMarks, paperTitle, exam_type, roll); 
+	                
 	            }
 	        }
 	    }
@@ -94,11 +94,10 @@ public class MySQLRepository implements StorageRepository{
 	
 	public Marks avgMarks(String paper_code, int year) throws SQLException {
 	    create_connection();
-	    ct.create_table();   
-
+	    ct.create_table();  
 	    Marks marks = null;
 	    double averageMarks = 0.0;
-
+	    
 	    String str = "SELECT AVG(marks_obtained) AS average_marks, full_marks, paper_title, th_pr_ia, half, roll FROM `marks` WHERE `paper_code` = ? AND `year` = ?";
 
 	    try (PreparedStatement ps = cn.prepareStatement(str)) {
@@ -107,19 +106,19 @@ public class MySQLRepository implements StorageRepository{
 	        try (ResultSet rs = ps.executeQuery()) {
 	            if (rs.next()) {
 	                averageMarks = rs.getDouble("average_marks");
-	               // System.out.println(averageMarks);
+	                //System.out.println(averageMarks);
 
 	                // You can access other columns as well
 	                int fullMarks = rs.getInt("full_marks");
 	                String paperTitle = rs.getString("paper_title");
 	                String exam_type = rs.getString("th_pr_ia");
 	                // If you want to include a placeholder for the roll since it's not available in AVG operation
-	                String roll = "null"; 
+	                String roll = rs.getString("roll"); 
 
 	                String yearS = String.valueOf(year);
 	                String fullMarksS = String.valueOf(fullMarks);
 	                String averageMarksS = String.valueOf(averageMarks);
-	                marks = new Marks(paper_code, yearS, fullMarksS, averageMarksS, paperTitle, exam_type, roll);                
+	                marks = new Marks(paper_code, yearS, fullMarksS, averageMarksS, paperTitle, exam_type, roll); 
 	            }
 	        }
 	    }
@@ -152,17 +151,20 @@ public class MySQLRepository implements StorageRepository{
 	    return marks;
 	}
 
-	
-	public Marks marks_sheet_gen(String roll) throws SQLException {
-	    create_connection();
+
+	@Override
+	public Marks marks_sheet_gen(String roll, String year, String sem) throws SQLException {
+		create_connection();
 	    ct.create_table();  
 	    
 	    Marks marks = new Marks(); // Initialize the Marks object
 	    List<Marks> marksList = new ArrayList<>(); // List to store mark details for each paper
 	    
-	    String str = "SELECT paper_code, paper_title, full_marks, marks_obtained, th_pr_ia FROM `marks` WHERE roll = ?";
+	    String str = "SELECT marks.paper_code, marks.paper_title, marks.full_marks, marks.th_pr_ia, marks.marks_obtained FROM marks INNER JOIN sem_details ON sem_details.s_id=marks.s_id WHERE marks.roll LIKE ? AND sem_details.sem_number = ? AND sem_details.sem_year = ?";
 	    try (PreparedStatement ps = cn.prepareStatement(str)) {
 	        ps.setString(1, roll);
+	        ps.setString(2, sem);
+	        ps.setString(3, year);
 	        try (ResultSet rs = ps.executeQuery()) {
 	            while (rs.next()) {
 	                String paperCode = rs.getString("paper_code");
@@ -173,7 +175,7 @@ public class MySQLRepository implements StorageRepository{
 	                String marksObtS = String.valueOf(marksObt);
 	                String exam_type = rs.getString("th_pr_ia");
 	                
-	                Marks details = new Marks(paperCode, "2023", fullMarksS, marksObtS, paperTitle, exam_type, roll);
+	                Marks details = new Marks(paperCode, year, fullMarksS, marksObtS, paperTitle, exam_type, roll);
 	                marksList.add(details);
 	            }
 	        }
@@ -182,7 +184,77 @@ public class MySQLRepository implements StorageRepository{
 	    marks.setMarksList(marksList); 
 	    return marks;
 	}
-
+	
+	@Override
+	public Marks getAbsentStudent(String paperCode, String year) throws SQLException{
+		create_connection();
+	    ct.create_table();  
+	    
+	    Marks marks = new Marks(); // Initialize the Marks object
+	    List<Marks> marksList = new ArrayList<>(); // List to store mark details for each paper
+	    
+	    String str = "SELECT roll, paper_title, full_marks, th_pr_ia, marks_obtained FROM marks  WHERE paper_code LIKE ? AND year = ? AND marks_obtained = ?";
+	    try (PreparedStatement ps = cn.prepareStatement(str)) {
+	        ps.setString(1, paperCode);
+	        ps.setString(2, year);
+	        ps.setInt(3, 0);
+	        try (ResultSet rs = ps.executeQuery()) {
+	            while (rs.next()) {
+	            	String roll = rs.getString("roll");
+	                String paperTitle = rs.getString("paper_title");
+	                int fullMarks = rs.getInt("full_marks");
+	                String fullMarksS = String.valueOf(fullMarks);
+	                String exam_type = rs.getString("th_pr_ia");
+	                
+	                Marks details = new Marks(paperCode, year, fullMarksS, "0", paperTitle, exam_type, roll);
+	                marksList.add(details);
+	            }
+	        }
+	    }
+	    
+	    marks.setMarksList(marksList); 
+	    return marks;
+	}
+	
+	@Override
+	public Marks getFailedStudents(String subCode, String examType, String year, int passPerc) throws SQLException{
+		create_connection();
+	    ct.create_table();  
+	    
+	    Marks marks = new Marks(); // Initialize the Marks object
+	    List<Marks> marksList = new ArrayList<>(); // List to store mark details for each paper
+	    
+	    String str = "SELECT full_marks FROM marks WHERE paper_code LIKE ? AND year = ? AND th_pr_ia= ? LIMIT 1;";
+	    try (PreparedStatement ps = cn.prepareStatement(str)) {
+	        ps.setString(1, subCode);
+	        ps.setString(3, examType);
+	        ps.setString(2, year);
+	        try (ResultSet rs = ps.executeQuery()) {
+	            while (rs.next()) {
+	                int fullMarks = rs.getInt("full_marks");
+	                String fullMarksS = String.valueOf(fullMarks);
+	                int passMark = (passPerc/100)*fullMarks;
+	                str = "SELECT roll,paper_code,marks_obtained FROM marks WHERE marks_obtained < ?";
+	        	    try (PreparedStatement ps1 = cn.prepareStatement(str)) {
+	        	        ps1.setInt(1, passMark);
+	        	        try (ResultSet rs1 = ps1.executeQuery()) {
+	        	            while (rs1.next()) {
+	        	            	int obMark = rs1.getInt("marks_obtained");
+	        	            	String obMarks = String.valueOf(obMark);
+	        	            	String paperTitle = rs1.getString("paper_title");
+	        	            	String roll = rs1.getString("roll");
+	        	            	Marks details = new Marks(subCode, year, fullMarksS, obMarks, paperTitle, examType, roll);
+	        	                marksList.add(details);
+	        	            }
+	        	        }
+	        	    }
+	            }
+	        }
+	    }
+	    
+	    marks.setMarksList(marksList); 
+	    return marks;
+	}
 	
 	public void addDetails(List<Student> studentList) throws SQLException {
 		try {
@@ -286,7 +358,7 @@ public void addDetails(int sem, String semYear, List<String> rollList) throws SQ
 		}
 		
 	}
-
+	
 	@Override
 	public String addDetails() {
 		// TODO Auto-generated method stub
@@ -298,4 +370,5 @@ public void addDetails(int sem, String semYear, List<String> rollList) throws SQ
 		// TODO Auto-generated method stub
 		return null;
 	}
+	
 }

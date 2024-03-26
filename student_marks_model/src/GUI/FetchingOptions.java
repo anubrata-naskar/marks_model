@@ -125,31 +125,31 @@ public class FetchingOptions extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        AverageMarks am =new AverageMarks();
+        AverageMark am =new AverageMark();
         am.setVisible(true);
         this.dispose();
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-        MaximumMarks mm =new MaximumMarks();
+    	HighestMark mm =new HighestMark();
         mm.setVisible(true);
         this.dispose();
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
-        FailedStudents fs = new FailedStudents();
+        FailedStudent fs = new FailedStudent();
         fs.setVisible(true);
         this.dispose();
     }//GEN-LAST:event_jButton4ActionPerformed
 
     private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
-        GeneratePDFMarksSheet gm = new GeneratePDFMarksSheet();
+        GenerateMarksheet gm = new GenerateMarksheet();
         gm.setVisible(true);
         this.dispose();
     }//GEN-LAST:event_jButton5ActionPerformed
 
     private void jButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton6ActionPerformed
-        AbsentStudents as = new AbsentStudents();
+        AbsentStudent as = new AbsentStudent();
         as.setVisible(true);
         this.dispose();
     }//GEN-LAST:event_jButton6ActionPerformed

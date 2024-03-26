@@ -3,10 +3,8 @@ package repository;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
-
 import transferobjects.Marks;
 import transferobjects.Student;
-import connections.*;
 
 public abstract class BaseRepository {
 	protected StorageRepository storage;
@@ -21,6 +19,7 @@ public abstract class BaseRepository {
 	public abstract void storeSem(int semNum, String semYear, List<String> rollList) throws SQLException;
 	public abstract Marks highestMarks(String s, int n) throws SQLException;
 	public abstract Marks avgMarks(String s, int n) throws SQLException;
-	public abstract Marks qualify_perc(String s, int n) throws SQLException;
-	public abstract Marks marks_sheet_gen(String roll) throws SQLException ;
+	public abstract Marks marks_sheet_gen(String roll, String year, String sem) throws SQLException ;
+	public abstract Marks getAbsentStudent(String paperCode, String year) throws SQLException;
+	public abstract Marks getFailedStudents(String subCode, String examType, String year, int passPerc) throws SQLException;
 }

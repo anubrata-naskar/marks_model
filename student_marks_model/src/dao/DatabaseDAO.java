@@ -18,17 +18,6 @@ public class DatabaseDAO {
 	private List<Student> studentList = new ArrayList<Student>();
 	private List<Marks> marksList = new ArrayList<Marks>();
 	private List<String> rollList = new ArrayList<String>();
-	
-//	  private String url = "jdbc:mysql://localhost:3306/stu_project";
-//	    private String username = "root";
-//	    private String password = "";
-//	    private Connection connection = null;
-//	    
-//	    public Connection getConnection() throws SQLException {
-//	    	CreateConnectionMySQL create_con = new CreateConnectionMySQL();
-//	    	Connection cn = create_con.getConnection();
-//			return cn;
-//	    }
 	    public void getExcelData(List<List<String>> xlData,String examDetails) throws SQLException,IndexOutOfBoundsException {
 			String [] examdetails = examDetails.split("SEM");
 			String dept = examdetails[0].toLowerCase();
@@ -39,18 +28,20 @@ public class DatabaseDAO {
 			String roll = null;
 			System.out.println("dept:"+dept+"  sem:"+semNum+"  year:"+semYear);
 			for(List<String> resultData :xlData) {
-				roll = (resultData.get(3)+"/"+resultData.get(4)+"/"+resultData.get(5)).toLowerCase();
-				String paperCode = (resultData.get(1)).toLowerCase();
-				String paperTitle = (resultData.get(0)).toLowerCase();
-				String examType = (resultData.get(2)).toLowerCase();
-				String fullMark = resultData.get(6);
-				String obMark = resultData.get(7);
-				int fullMarks = Integer.parseInt(fullMark);
-				int obMarks = Integer.parseInt(obMark);
-				//studentList.add(new Student(roll,dept));
-				studentList.add(new Student(paperTitle, paperCode, examType, " ", roll, dept,fullMarks, obMarks));
-				rollList.add(roll);
-				marksList.add(new Marks(paperCode,semYear,fullMark,obMark,paperTitle,examType,roll));
+				if(!resultData.isEmpty()) {
+					roll = (resultData.get(4)+"/"+resultData.get(5)+"/"+resultData.get(6)).toLowerCase();
+					String paperCode = (resultData.get(1)).toLowerCase();
+					String paperTitle = (resultData.get(0)).toLowerCase();
+					String examType = (resultData.get(2)).toLowerCase();
+					String half = (resultData.get(3).toLowerCase());
+					String fullMark = resultData.get(7);
+					String obMark = resultData.get(8);
+					int fullMarks = Integer.parseInt(fullMark);
+					int obMarks = Integer.parseInt(obMark);
+					studentList.add(new Student(paperTitle, paperCode, examType, half, roll, dept,fullMarks, obMarks));
+					rollList.add(roll);
+					marksList.add(new Marks(paperCode,semYear,fullMark,obMark,paperTitle,examType,roll));
+				}
 			}
 			BaseRepository marksRepo = new MarksRepository(new MySQLRepository());
 				marksRepo.storeStudentDetails(studentList);

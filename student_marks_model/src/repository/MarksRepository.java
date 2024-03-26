@@ -42,16 +42,26 @@ public class MarksRepository extends BaseRepository{
 		return h;
 	}
 	public Marks  avgMarks(String paper_code, int year) throws SQLException {
+		System.out.println("himr");
 		Marks h = storage.avgMarks(paper_code, year);
 		return h;
 	}
-	public Marks  qualify_perc(String paper_code, int year) throws SQLException {
-		Marks h = storage.qualify_perc(paper_code, year);
+	
+	//marks-sheet generate
+	public Marks marks_sheet_gen(String roll, String year, String sem) throws SQLException {
+		Marks h = storage.marks_sheet_gen(roll, year, sem);
 		return h;
 	}
-	//marks-sheet generate
-	public Marks marks_sheet_gen(String roll) throws SQLException {
-		Marks h = storage.marks_sheet_gen(roll);
+
+	@Override
+	public Marks getAbsentStudent(String paperCode, String year) throws SQLException{
+		Marks h = storage.getAbsentStudent(paperCode, year);
+		return h;
+	}
+
+	@Override
+	public Marks getFailedStudents(String subCode, String examType, String year, int passPerc) throws SQLException {
+		Marks h = storage.getFailedStudents(subCode, examType, year, passPerc);
 		return h;
 	}
 }

@@ -9,5 +9,6 @@ public class UserDAO {
 	
 	
 	//transferobjects
-	User user = new User();
+	//User user = new User();
+
 }

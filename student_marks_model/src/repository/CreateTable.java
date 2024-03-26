@@ -1,14 +1,9 @@
 package repository;
 
 import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.SQLException;
-import com.mysql.cj.xdevapi.Statement;
-import java.sql.DriverManager;
 import java.sql.SQLException;
 
 import connections.CreateConnectionMySQL;
-import java.sql.Connection;
 
 
 public class CreateTable {

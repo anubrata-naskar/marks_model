@@ -1,9 +1,6 @@
 package dao;
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
+
 import java.sql.SQLException;
-import java.util.ArrayList;
 import java.util.List;
 
 import repository.*;
@@ -31,16 +28,16 @@ public class MarksDAO implements MarksDetailsDAO {
 		marks = mr.avgMarks(paper_code,year);
 		return marks;
 	}
-	public Marks qualify_perc(String paper_code, int year) throws SQLException {
-		Marks marks = null;
-		marks = mr.qualify_perc(paper_code,year);
-		return marks;
-	}
+//	public Marks qualify_perc(String paper_code, int year) throws SQLException {
+//		Marks marks = null;
+//		marks = mr.qualify_perc(paper_code,year);
+//		return marks;
+//	}
 	
 	//marks-sheet generate
-	public Marks marks_sheet_gen(String roll) throws SQLException {
+	public Marks marks_sheet_gen(String roll, String year, String sem) throws SQLException {
 		Marks marks = null;
-		marks = mr.marks_sheet_gen(roll);
+		marks = mr.marks_sheet_gen(roll,year,sem);
 		return marks;
 	}
 	@Override
@@ -57,5 +54,23 @@ public class MarksDAO implements MarksDetailsDAO {
 	public int insert(Student student) throws SQLException {
 		// TODO Auto-generated method stub
 		return 0;
+	}
+
+	public Marks getAbsentStudent(String paperCode, String year) throws SQLException{
+		Marks marks = null;
+		marks = mr.getAbsentStudent(paperCode, year);
+		return marks;
+	}
+
+	public Marks getFailedStudents(String subCode, String examType, String year, int passPerc) throws SQLException{
+		Marks marks = null;
+		marks = mr.getFailedStudents(subCode, examType, year, passPerc);
+		return marks;
+	}
+
+	@Override
+	public Marks qualify_perc(String paper_code, int year) throws SQLException {
+		// TODO Auto-generated method stub
+		return null;
 	}
 }

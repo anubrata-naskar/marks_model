@@ -57,13 +57,20 @@ public class UserRepository extends BaseRepository{
 	}
 
 	@Override
-	public Marks qualify_perc(String s, int n) throws SQLException {
+	public Marks marks_sheet_gen(String roll, String year, String sem) throws SQLException {
+		return null;
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public Marks getAbsentStudent(String paperCode, String year) throws SQLException {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
 	@Override
-	public Marks marks_sheet_gen(String roll) throws SQLException {
+	public Marks getFailedStudents(String subCode, String examType, String year, int passPerc) throws SQLException {
 		// TODO Auto-generated method stub
 		return null;
 	}

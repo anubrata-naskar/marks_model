@@ -8,7 +8,7 @@ public class Marks {
 	private List<Marks> marksList;
 	
 	public Marks() {
-		//
+		
 	}
 	public Marks(String paperCode,String semYear,String fullMark,String obMark, String paperTitle, String examType, String roll) {
 		this.paperCode = paperCode;
@@ -53,4 +53,5 @@ public class Marks {
 	public String getRoll() {
 		return roll;
 	}
+	
 }

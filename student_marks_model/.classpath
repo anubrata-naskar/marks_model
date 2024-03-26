@@ -31,5 +31,9 @@
 	<classpathentry kind="lib" path="C:/Users/anubrata/Downloads/jars/poi-scratchpad-4.1.2.jar"/>
 	<classpathentry kind="lib" path="C:/Users/anubrata/Downloads/jars/SparseBitSet-1.2.jar"/>
 	<classpathentry kind="lib" path="C:/Users/anubrata/Downloads/jars/xmlbeans-3.1.0.jar"/>
+	<classpathentry kind="lib" path="C:/Users/anubrata/Downloads/pdf jars/commons-logging-1.2.jar"/>
+	<classpathentry kind="lib" path="C:/Users/anubrata/Downloads/pdf jars/fontbox-2.0.13.jar"/>
+	<classpathentry kind="lib" path="C:/Users/anubrata/Downloads/pdf jars/pdfbox-2.0.13.jar"/>
+	<classpathentry kind="lib" path="C:/Users/anubrata/Downloads/pdf jars/pdfbox-tools-2.0.13.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>

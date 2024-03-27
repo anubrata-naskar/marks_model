@@ -48,12 +48,15 @@ public class FetchFromDatabase {
 		List<Marks> x = l.getMarksList();
 		PDDocument document = new PDDocument();
 		String pdfName = roll.replace('/','_');
-		String pdfFilePath = "C:\\Users\\anubrata\\Downloads\\marksheet-"+pdfName+".pdf";
+		String userHome = System.getProperty("user.home");
+
+		String pdfFilePath = userHome+"\\Downloads\\marksheet-"+pdfName+".pdf";
 		
 		PDPage page = new PDPage();
         document.addPage(page);
-        String text = "MARKSHEET : "+roll;
-        String text2 = "Paper code    Full Marks  Marks Obtained      Paper Title";
+        String rollU = roll.toUpperCase();
+        String text = "MARKSHEET : "+rollU;
+        String text2 = "Paper code   Exam Type  Full Marks  Marks Obtained   Paper Title";
         
         
 		//PDPageContentStream contentStream;
@@ -81,7 +84,7 @@ public class FetchFromDatabase {
             for (Marks details : x) {
 //			System.out.println("Paper code: " + details.getPaperCode() + ", Paper Title: " + details.getPaperTitle() +
 //                    ", Full Marks: " + details.getFullMark() + ", Marks Obtained: " + details.getObMark());
-		String text1 =  details.getPaperCode()+"       "+ details.getFullMark()+"  "+details.getObMark()+" "+details.getPaperTitle();
+		String text1 =  details.getPaperCode()+"       "+details.getExamType()+"       "+ details.getFullMark()+"  "+details.getObMark()+" "+details.getPaperTitle();
 		//String text3 = "Full Marks: " + details.getFullMark();
 		//String text4 = "Marks Obtained: " + details.getObMark();
 		

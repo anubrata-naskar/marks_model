@@ -1,4 +1,4 @@
-# Marks Model System 📊
+# Marks Model System    📊
 
 **Academic Management System for CSE Department, University of Calcutta**
 
